@@ -40,15 +40,15 @@ router.post(
             };
             jwt.sign(
                 payload,                    // token으로 변환할 데이터
-                secretObj.jwtSecret,                // secret key 값
+                secretObj.jwtSecret,        // secret key 값
                 { expiresIn: "1h"},         // token의 유효시간을 1시간으로 설정
                 (err, token) => {
                     if (err) throw err;
-                    res.send({ token });
+                    console.log("register success");
+                    res.send('register success');
+                    // res.send({ token });
                 }
             );
-
-            // res.send("Success");
         } catch (error) {
             console.error(error.message);
             res.status(500).send("Server Error!");

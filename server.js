@@ -17,9 +17,11 @@ app.use(passport.initialize()); // passport 구동
 app.use(passport.session()); // 세션 연결
 
 // get 요청시 "API running"을 response 해주기
+/*
 app.get("/", (req, res) => {
     res.send("API Running");
 });
+*/
 
 // Connect DB
 connectDB();

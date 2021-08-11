@@ -4,9 +4,19 @@ var User = require('../models/User');
 
 module.exports = () => {
     passport.serializeUser((user, done) => {        // Strategy 성공 시 호출됨
-        done(null, user);                           // 여기의 user가 deserializeUser의 첫번째 매개변수로 이동
+        done(null, user._id);                           // 여기의 user가 deserializeUser의 첫번째 매개변수로 이동
     });
 
+    passport.deserializeUser( async (id, done) => {
+        try {
+            var user = await User.findOne({ where : { id }});
+            done(null, user);
+        }
+        catch(error) {
+            console.error(error);
+            done(error);
+        }
+    });
     passport.deserializeUser((user, done) => {      // Strategy 성공 시 호출됨
         done(null, user);                           // 여기의 user가 req.user가 됨
     });
